@@ -1,21 +1,21 @@
-import java.util.Scanner;
+import Chain.PaymentA;
+import Chain.PaymentB;
+import Chain.PaymentC;
+import Chain.PaymentHandler;
+
 public class Main {
     public static void main(String[] args) {
-        int PaymentA = 100;
-        int PaymentB = 300;
-        int PaymentC = 1000;
+        // Создаем обработчики
+        PaymentHandler paymentA = new PaymentA();
+        PaymentHandler paymentB = new PaymentB();
+        PaymentHandler paymentC = new PaymentC();
 
+        // Устанавливаем цепочку
+        paymentA.setNextHandler(paymentB);
+        paymentB.setNextHandler(paymentC);
 
-        Scanner scanner = new Scanner(System.in);
-        int PaymentHandler = scanner.nextInt();
-
-        if (PaymentA > PaymentHandler){
-            System.out.println("You can pay with A way");
-        } else if (PaymentB > PaymentHandler) {
-            System.out.println("You can pay with B way");
-        } else if (PaymentC > PaymentHandler) {
-            System.out.println("You can pay with C way");
-        }
-
+        // Попытка покупки на сумму 210 долларов
+        double purchaseAmount = 210;
+        paymentA.handlePayment(purchaseAmount);
     }
 }
